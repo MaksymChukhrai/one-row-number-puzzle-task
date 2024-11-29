@@ -146,11 +146,16 @@ async function main() {
         console.log('Fragments loaded:', fragments.length);
 
         const longestSequenceResult = findLongestSequence(fragments);
+        const validationResult = validateSequence(longestSequenceResult.sequence, fragments);
         
         document.getElementById('result').textContent = longestSequenceResult.sequence;
+        document.getElementById('digits').textContent = longestSequenceResult.sequence.length;
+        document.getElementById('fragments').textContent = new Set(validationResult.usedFragments).size;
+        document.getElementById('loaded').textContent = fragments.length;
+        console.log('Longest Sequence:', longestSequenceResult.sequence);
 
         console.log('Самая длинная последовательность:', longestSequenceResult.sequence);
-        const validationResult = validateSequence(longestSequenceResult.sequence, fragments);
+        
         
         console.log('Использовано уникальных фрагментов:', new Set(validationResult.usedFragments).size);
         console.log('Осталось неиспользованных фрагментов:', validationResult.remainingFragments.length);
